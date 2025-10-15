@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BetControl – Seu limite, sua liberdade</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-900 text-white">
+
+    <main id="home-section" class="min-h-screen flex flex-col items-center justify-center text-center p-6 transition-opacity duration-500">
+        <div class="space-y-4">
+            <h1 class="text-5xl md:text-7xl font-bold text-cyan-400">BetControl</h1>
+            <p class="text-xl md:text-2xl text-gray-300">Seu limite, sua liberdade.</p>
+            <p class="text-lg text-gray-400 max-w-md mx-auto">Controle suas apostas. Recupere o controle da sua vida.</p>
+        </div>
+        <button id="simular-btn" class="mt-10 px-8 py-3 bg-cyan-500 hover:bg-cyan-600 text-gray-900 font-bold rounded-lg shadow-lg transition-transform transform hover:scale-105">
+            Simular Controle
+        </button>
+    </main>
+
+    <section id="dashboard-section" class="hidden p-4 md:p-8 max-w-7xl mx-auto transition-opacity duration-500">
+        <header class="mb-8">
+            <h2 class="text-3xl font-bold text-center text-cyan-400">Painel de Controle</h2>
+            <p class="text-center text-gray-400 mt-2">Fontes: DataSenado, CNDL/SPC, Agência Gov, Unifesp.</p>
+        </header>
+
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-gray-800 p-6 rounded-lg shadow-lg text-center">
+                <h3 class="font-semibold text-gray-300 mb-2">Apostadores em Risco</h3>
+                <p class="text-4xl font-bold text-yellow-400">38,6%</p>
+                <p class="text-sm text-gray-400 mt-2">apresentam algum grau de transtorno.</p>
+            </div>
+            <div class="bg-gray-800 p-6 rounded-lg shadow-lg text-center">
+                <h3 class="font-semibold text-gray-300 mb-2">Gasto Mensal Médio</h3>
+                <p class="text-4xl font-bold text-red-500">R$ 186</p>
+                <p class="text-sm text-gray-400 mt-2">por apostador no geral.</p>
+            </div>
+            <div class="bg-gray-800 p-6 rounded-lg shadow-lg text-center">
+                <h3 class="font-semibold text-gray-300 mb-2">Apostam de Forma Problemática</h3>
+                <p class="text-4xl font-bold text-orange-400">10,9 Milhões</p>
+                <p class="text-sm text-gray-400 mt-2">de brasileiros.</p>
+            </div>
+        </div>
+
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+            <!-- Gráfico 1: Perfil de Risco -->
+            <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+                <h3 class="font-semibold mb-1 text-gray-200">📊 Apostadores em Zona de Risco</h3>
+                <p class="text-sm text-gray-400 mb-4">Percentual de apostadores que apresentam risco de vício.</p>
+                <canvas id="perfilRiscoChart"></canvas>
+                <div class="mt-4 p-3 bg-gray-700/50 rounded-lg">
+                    <p class="font-semibold text-yellow-300">Inferência Lógica:</p>
+                    <p class="text-sm text-gray-300">Quase 4 em cada 10 apostadores já apresentam sinais de risco. A vulnerabilidade entre adolescentes (55,2%) é ainda mais alarmante.</p>
+                </div>
+            </div>
+
+            <!-- Gráfico 2: Gasto Médio -->
+            <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+                <h3 class="font-semibold mb-1 text-gray-200">💰 Gasto Mensal Médio por Apostador</h3>
+                <p class="text-sm text-gray-400 mb-4">Comparativo de gastos por classe social.</p>
+                <canvas id="gastoMedioChart"></canvas>
+                <div class="mt-4 p-3 bg-gray-700/50 rounded-lg">
+                    <p class="font-semibold text-red-400">Inferência Lógica:</p>
+                    <p class="text-sm text-gray-300">O gasto médio já é significativo. Apostadores de classes A/B gastam 43% a mais, indicando que maior renda pode levar a maiores perdas.</p>
+                </div>
+            </div>
+
+            <!-- Gráfico 3: Perfil Demográfico -->
+            <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+                <h3 class="font-semibold mb-1 text-gray-200">👥 Perfil Demográfico (Gênero)</h3>
+                <p class="text-sm text-gray-400 mb-4">Distribuição de apostadores por gênero.</p>
+                <canvas id="perfilGeneroChart"></canvas>
+                 <div class="mt-4 p-3 bg-gray-700/50 rounded-lg">
+                    <p class="font-semibold text-green-400">Inferência Lógica:</p>
+                    <p class="text-sm text-gray-300">O perfil do apostador é predominantemente masculino. Campanhas de conscientização precisam ter um foco direcionado para esse público.</p>
+                </div>
+            </div>
+
+            <!-- Gráfico 4: População Afetada -->
+            <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+                <h3 class="font-semibold mb-1 text-gray-200">🌍 População de Apostadores no Brasil</h3>
+                <p class="text-sm text-gray-400 mb-4">Número de pessoas que apostaram nos últimos 30 dias.</p>
+                <canvas id="populacaoApostadoresChart"></canvas>
+                 <div class="mt-4 p-3 bg-gray-700/50 rounded-lg">
+                    <p class="font-semibold text-blue-300">Inferência Lógica:</p>
+                    <p class="text-sm text-gray-300">Com mais de 22 milhões de apostadores ativos, o mercado atingiu uma escala massiva, tornando o vício um problema de saúde pública em potencial.</p>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg mb-8">
+            <h3 class="text-xl font-bold mb-4 text-center">Ferramentas de Controle</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+
+                <div>
+                    <label for="limite-semanal" class="block font-semibold mb-2">Definir Gasto Semanal (R$)</label>
+                    <input type="number" id="limite-semanal" class="w-full bg-gray-700 text-white p-2 rounded border border-gray-600 focus:ring-2 focus:ring-cyan-500 focus:outline-none" placeholder="Ex: 100">
+                    <button id="definir-limite-btn" class="mt-2 w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg">Salvar Limite</button>
+                    <p id="limite-feedback" class="text-xs text-green-400 mt-2 h-4"></p>
+                </div>
+
+                <!-- Temporizador -->
+                <div>
+                    <p class="font-semibold mb-2">Temporizador de Sessão</p>
+                    <div id="timer-display" class="text-4xl font-mono bg-gray-900 p-2 rounded-lg">15:00</div>
+                    <p class="text-xs text-gray-500 mt-2">Alerta será emitido ao final do tempo.</p>
+                </div>
+                <!-- Modo Bloqueio -->
+                <div>
+                     <label class="block font-semibold mb-2">Pausa Imediata</label>
+                    <button id="lock-btn" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg">Ativar Modo Bloqueio (1h)</button>
+                    <p id="lock-message" class="text-sm text-yellow-400 font-semibold mt-2 h-4"></p>
+                </div>
+            </div>
+        </div>
+        
+
+        <footer class="text-center p-6 bg-gray-800 rounded-lg">
+             <h3 class="text-lg font-semibold text-gray-200">Precisa de Ajuda Profissional?</h3>
+             <p class="text-gray-400 mb-4">Você não está sozinho. Procure apoio.</p>
+             <div class="flex justify-center space-x-6">
+                <a href="https://ibjr.org.br/" target="_blank" class="text-cyan-400 hover:text-cyan-300 underline">IBJR (Instituto Brasileiro de Jogo Responsável)</a>
+                <a href="https://jogoresponsavel.org.br/" target="_blank" class="text-cyan-400 hover:text-cyan-300 underline">Jogo Responsável BR</a>
+             </div>
+        </footer>
+
+    </section>
+
+    <!-- Script JS externo -->
+    <script src="script.js"></script>
+</body>
+</html>
+
