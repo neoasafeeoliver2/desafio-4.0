@@ -29,7 +29,7 @@ definirLimiteBtn.addEventListener('click', () => {
 
 // Temporizador
 const timerDisplay = document.getElementById('timer-display');
-let timerSeconds = 30 * 60; // 15 minutos
+let timerSeconds = 30 * 60;
 const timerInterval = setInterval(() => {
     if (timerSeconds > 0) {
         timerSeconds--;
@@ -74,7 +74,7 @@ function initCharts() {
     window.myCharts = [];
 
 
-    Chart.defaults.color = '#cbd5e1'; // cinza claro para texto
+    Chart.defaults.color = '#cbd5e1';
     Chart.defaults.borderColor = 'rgba(255, 255, 255, 0.1)';
 
 
